@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
+	default-autowire="byName">
+
+	<bean id="userService"
+		class="com.eaglegenomics.simlims.spring.HibernateUserDetailsService" />
+
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="userService" />
+	</security:authentication-manager>
+
+	<security:global-method-security
+		secured-annotations="enabled" jsr250-annotations="enabled" />
+
+	<bean id="loginDetails" class="com.eaglegenomics.simlims.runner.LoginDetails">
+		<property name="username"><value>admin</value></property>
+		<property name="password"><value>admin</value></property>
+	</bean>
+
+</beans>

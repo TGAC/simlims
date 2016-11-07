@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+                       default-autowire="byName" >
+                       
+	<bean id="helloWorldProtocol" class="com.eaglegenomics.simlims.core.BasicProtocol">
+		<property name="name" value="HelloWorld" />
+		<property name="description"
+			value="An example Hello World protocol with three activities." />
+		<property name="privateVersion" value="1" />
+		<property name="publicVersion" value="1" />
+		<property name="activityAliasMap">
+			<map>
+				<entry key="example1ActivityAlias" value-ref="example1Activity" />
+				<entry key="example2ActivityAlias" value-ref="example2Activity" />
+				<entry key="example3ActivityAlias" value-ref="example3Activity" />
+			</map>
+		</property>
+		<property name="activityFlowMap">
+			<map>
+				<entry key="example1ActivityAlias">
+					<set>
+						<value>example2ActivityAlias</value>
+					</set>
+				</entry>
+				<entry key="example2ActivityAlias">
+					<set>
+						<value>example3ActivityAlias</value>
+					</set>
+				</entry>
+			</map>
+		</property>
+		<property name="startpoint" value="example1ActivityAlias" />
+		<property name="endpoints">
+			<set>
+				<value>example3ActivityAlias</value>
+			</set>
+		</property>
+		<property name="role" value="PROTOCOL_HelloWorld_1_1" />
+	</bean>
+	<bean id="demoProtocolRequestControllerHelper" class="com.eaglegenomics.simlims.demoprotocol.DemoProtocolRequestControllerHelper">
+		<property name="protocol" ref="helloWorldProtocol"/>
+		<property name="dataModelView" value="/pages/requests/demoprotocol.jsp"/>
+		<property name="resultsControllerUrl" value="/protocols/demoprotocol/results"/>
+	</bean>
+	<bean id="demoProtocolResultsController" class="com.eaglegenomics.simlims.demoprotocol.DemoProtocolResultsController"/>
+
+	<bean id="example1Activity" class="com.eaglegenomics.simlims.demoprotocol.Example1Activity">
+		<property name="name" value="Example1" />
+		<property name="description" value="An example activity." />
+		<property name="version" value="1" />
+		<property name="inputDataClass" value="java.lang.String" />
+		<property name="outputDataClass" value="java.lang.String" />
+		<property name="role" value="ACTIVITY_Example1_1" />
+	</bean>
+	<bean id="example1ActivityControllerHelper" class="com.eaglegenomics.simlims.demoprotocol.Example1ActivityControllerHelper">
+		<property name="activity" ref="example1Activity"/>
+		<property name="dataModelView" value="/pages/activities/example1.jsp"/>
+	</bean>
+
+	<bean id="example2Activity" class="com.eaglegenomics.simlims.demoprotocol.Example2Activity">
+		<property name="name" value="Example2" />
+		<property name="description" value="An example activity." />
+		<property name="version" value="1" />
+		<property name="inputDataClass" value="java.lang.String" />
+		<property name="outputDataClass" value="java.lang.String" />
+		<property name="role" value="ACTIVITY_Example2_1" />
+	</bean>
+	<!--  No helper as it is automated -->
+
+	<bean id="example3Activity" class="com.eaglegenomics.simlims.demoprotocol.Example3Activity">
+		<property name="name" value="Example3" />
+		<property name="description" value="An example activity." />
+		<property name="version" value="1" />
+		<property name="inputDataClass" value="java.lang.String" />
+		<property name="outputDataClass" value="java.lang.String" />
+		<property name="role" value="ACTIVITY_Example3_1" />
+	</bean>
+	<bean id="example3ActivityControllerHelper" class="com.eaglegenomics.simlims.demoprotocol.Example3ActivityControllerHelper">
+		<property name="activity" ref="example3Activity"/>
+		<property name="dataModelView" value="/pages/activities/example3.jsp"/>
+	</bean>
+	
+</beans>
