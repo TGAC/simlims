@@ -8,9 +8,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.eaglegenomics.simlims</groupId>
     <artifactId>simlims-spring</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
     <name>Simlims Spring IoC</name>
     <build>
         <plugins>
@@ -26,6 +24,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
         <dependency>
             <groupId>com.eaglegenomics.simlims</groupId>
             <artifactId>simlims-core</artifactId>

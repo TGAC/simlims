@@ -8,10 +8,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.eaglegenomics.simlims</groupId>
     <artifactId>simlims-sqlstore</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.5-SNAPSHOT</version>
     <name>Simlims SQL Store</name>
     <url>http://maven.apache.org</url>
     <build>
